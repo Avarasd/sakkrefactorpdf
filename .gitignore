@@ -4,3 +4,4 @@
 # Video pipeline artifacts
 .video_frames/
 node_modules/
+carousel_walkthrough.mp4
