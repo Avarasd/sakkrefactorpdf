@@ -1,2 +1,6 @@
 .env
 .DS_Store
+
+# Video pipeline artifacts
+.video_frames/
+node_modules/

@@ -1,0 +1,63 @@
+/* Cinematic-only layout. Additive; never edit style.css or index.html. */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0d0b09;           /* neutral dark surround (never seen in the 1:1 clip) */
+  overflow: hidden;
+}
+
+/* The fixed capture viewport. Exactly one slide's size (4:5). */
+#stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1350px;
+  overflow: hidden;
+  background: #ffffff;
+  /* isolate so the camera scale re-rasterizes crisply */
+  transform: translateZ(0);
+}
+
+/* The camera holds all four slides laid out horizontally and is the only
+   element we transform. transform-origin top-left keeps the framing math simple. */
+#camera {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1350px;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* Each slide sits at x = index * 1080 inside the camera. Override the deck's
+   outer chrome (radius / shadow / border / max-width) so the slide fills the
+   stage edge to edge with no gaps. We do NOT touch style.css for this. */
+#camera .carousel-slide {
+  position: absolute;
+  top: 0;
+  display: flex;                 /* the deck hides non-active slides; force visible */
+  width: 1080px;
+  max-width: 1080px;
+  height: 1350px;
+  min-height: 1350px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none !important;    /* kill the deck's fadeIn keyframe (wall-clock) */
+}
+
+#camera #slide-1 { left: 0; }
+#camera #slide-2 { left: 1080px; }
+#camera #slide-3 { left: 2160px; }
+#camera #slide-4 { left: 3240px; }
+
+/* Callouts are driven deterministically by cinematic.js. Start hidden so the
+   first frames before a callout beat never flash the final state. The engine
+   writes inline transform/opacity every seek(); this is only the resting default. */
+#camera .code-side-callout {
+  opacity: 0;
+}

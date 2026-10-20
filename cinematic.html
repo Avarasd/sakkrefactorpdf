@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess TUI Carousel — Cinematic Walkthrough</title>
+
+  <!-- Same typography as index.html so visuals match exactly -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Reuse the deck's design system verbatim -->
+  <link rel="stylesheet" href="style.css?v=3.0">
+  <!-- Cinematic-only layout tweaks (stage/camera, chrome overrides) -->
+  <link rel="stylesheet" href="cinematic.css">
+</head>
+<body>
+
+  <div id="stage">
+    <div id="camera">
+
+      <!-- ================= SLIDE 1: COVER & HOOK ================= -->
+      <section class="carousel-slide" id="slide-1" data-slide-index="1" aria-label="Slide 1 of 4: Overview">
+        <div class="slide-top-bar">
+          <div class="top-bar-left">
+            <span class="slide-badge">Architectural Case Study</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Terminal Chess Engine</span>
+          </div>
+          <span class="slide-pagination">01 / 04</span>
+        </div>
+
+        <div class="cover-content">
+          <div class="cover-hook-badge">
+            <span>Engineering Post-Mortem</span>
+          </div>
+
+          <h1 class="cover-title">
+            Chess TUI: <span class="c-text">Procedural C</span> <span class="arrow-text">&rarr;</span> <span class="cpp-text">Modern C++ OOP</span>
+          </h1>
+
+          <p class="cover-subtitle">
+            How refactoring an entire terminal chess engine to Object-Oriented Programming unlocked compile-time safety, dynamic polymorphism, and <strong>75% code reduction</strong>.
+          </p>
+
+          <div class="cover-kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Lines of Code</span>
+              </div>
+              <div class="kpi-stat">~75% Less</div>
+              <div class="kpi-desc">Core logic cut by more than half, eliminating nested switches and redundant boilerplate.</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Architecture</span>
+              </div>
+              <div class="kpi-stat">Polymorphism</div>
+              <div class="kpi-desc">Replaced procedural switch-case dispatch with pure virtual methods conforming to OCP.</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Resource Safety</span>
+              </div>
+              <div class="kpi-stat">100% RAII</div>
+              <div class="kpi-desc">Zero file handle leaks via deterministic destructors and typed exceptions.</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Type Safety</span>
+              </div>
+              <div class="kpi-stat">Strong Types</div>
+              <div class="kpi-desc">Replaced raw char arrays, magic character math, and double pointers with safe object pointers.</div>
+            </div>
+          </div>
+
+          <div class="cover-cta">
+            <span>Swipe to explore the three refactoring pairs</span>
+          </div>
+        </div>
+
+        <div class="slide-footer-bar">
+          <span class="slide-footer-brand">Chess TUI Architecture — C to C++ OOP</span>
+          <span class="slide-footer-note">Swipe</span>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 2: CASE 01 - EVALUATION ================= -->
+      <section class="carousel-slide" id="slide-2" data-slide-index="2" aria-label="Slide 2 of 4: Board Evaluation">
+        <div class="slide-top-bar">
+          <div class="top-bar-left">
+            <span class="slide-badge">Case 01</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Evaluation Engine</span>
+          </div>
+          <span class="slide-pagination">02 / 04</span>
+        </div>
+
+        <div class="slide-main-content">
+          <div class="case-header-row">
+            <h2 class="case-title">Board Material Evaluation (<code>check_eval</code>)</h2>
+            <span class="case-metric-pill">32 LOC &rarr; 10 LOC (-69%)</span>
+          </div>
+
+          <!-- 100% Vector Native Code Blocks (No Horizontal Clipping) -->
+          <div class="code-comparison-row">
+            <!-- Left: C Window -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">chess.c</span>
+                  <span class="lang-pill c">C (Legacy)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+                  </pre>
+                  <pre class="code-lines"><code><span class="kw">int</span> <span class="fn">check_eval</span>(<span class="kw">char</span> board[<span class="lt">8</span>][<span class="lt">8</span>]) {
+    <span class="kw">int</span> eval = <span class="lt">0</span>;
+    <span class="kw">for</span>(<span class="kw">int</span> i = <span class="lt">0</span>; i &lt; <span class="lt">8</span>; i++) {
+        <span class="kw">for</span>(<span class="kw">int</span> j = <span class="lt">0</span>; j &lt; <span class="lt">8</span>; j++) {
+            <span class="kw">char</span> piece = board[i][j];
+            <span class="kw">if</span>(piece == <span class="st">'.'</span>) <span class="kw">continue</span>;
+
+            <span class="kw">int</span> value = <span class="lt">0</span>;
+            <span class="kw">bool</span> isWhite = <span class="lt">false</span>;
+            <span class="kw">if</span>(piece &gt; <span class="st">'Z'</span>){
+                isWhite = <span class="lt">true</span>;
+                piece -= SMALL_CAP_DISTANCE;
+            } <span class="kw">else</span> {
+                isWhite = <span class="lt">false</span>;
+            }
+
+            <span class="kw">switch</span>(piece){
+                <span class="kw">case</span> <span class="st">'Q'</span>: value = VAL_QUEEN; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">'R'</span>: value = VAL_ROOK; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">'N'</span>: value = VAL_KNIGHT; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">'B'</span>: value = VAL_BISHOP; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">'P'</span>: value = VAL_PAWN; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="st">'K'</span>: value = VAL_KING; <span class="kw">break</span>;
+                <span class="kw">default</span>: value = <span class="lt">0</span>; <span class="kw">break</span>;
+            }
+
+            <span class="kw">if</span>(isWhite) eval += value;
+            <span class="kw">else</span> eval -= value;
+        }
+    }
+    <span class="kw">return</span> eval;
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Center Arrow -->
+            <div class="arrow-divider-col" aria-hidden="true">
+              <div class="arrow-circle">&rarr;</div>
+            </div>
+
+            <!-- Right: C++ Window -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">chess.cpp</span>
+                  <span class="lang-pill cpp">C++ (OOP)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+                  </pre>
+                  <pre class="code-lines"><code><span class="kw">int</span> <span class="fn">check_eval</span>(<span class="tp">Piece</span> <span class="op">*</span>board[<span class="lt">8</span>][<span class="lt">8</span>]) {
+    <span class="kw">int</span> eval = <span class="lt">0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> r = <span class="lt">0</span>; r &lt; <span class="lt">8</span>; r++)
+        <span class="kw">for</span> (<span class="kw">int</span> c = <span class="lt">0</span>; c &lt; <span class="lt">8</span>; c++) {
+            <span class="tp">Piece</span> <span class="op">*</span>p = board[r][c];
+            <span class="kw">if</span> (p == <span class="kw">nullptr</span>) <span class="kw">continue</span>;
+            eval += <span class="fn">isWhitePiece</span>(p) <span class="op">?</span> p<span class="op">-&gt;</span><span class="fn">value</span>() <span class="op">:</span> <span class="op">-</span>p<span class="op">-&gt;</span><span class="fn">value</span>();
+        }
+    <span class="kw">return</span> eval;
+}</code></pre>
+                </div>
+                <div class="code-side-callout">
+                  <div class="side-callout-header">Polymorphic Valuation Win</div>
+                  <div class="side-callout-text">
+                    <strong>Encapsulated Values:</strong> Replaced 15 lines of monolithic <code>switch-case</code> with a single <code>p-&gt;value()</code> call. Replaced ASCII arithmetic with type-safe <code>nullptr</code> checking.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Improvements Summary -->
+          <div class="improvements-card">
+            <div class="improvements-header">
+              <span>Key Improvements &amp; Architecture</span>
+            </div>
+            <p class="improvements-desc">
+              Replaced 32 lines of procedural code with 10 lines of clean OOP. The C version used manual ASCII offset arithmetic (<code>piece &gt; 'Z'</code>) and a bulky 15-line <code>switch</code> statement to map characters to values. In C++, each piece encapsulates its own material value through polymorphism (<code>p-&gt;value()</code>), guarded by type-safe <code>nullptr</code> checks instead of magic character comparisons.
+            </p>
+            <div class="concept-pills-row">
+              <span class="concept-pill">Polymorphic Valuation</span>
+              <span class="concept-pill">Zero ASCII Math</span>
+              <span class="concept-pill">Nullptr Safety</span>
+              <span class="concept-pill">-69% LOC</span>
+              <span class="concept-pill">Ternary Scoring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer-bar">
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 01</span>
+          <span class="slide-footer-note">Slide 2 of 4</span>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 3: CASE 02 - MOVE DISPATCH ================= -->
+      <section class="carousel-slide" id="slide-3" data-slide-index="3" aria-label="Slide 3 of 4: Move Validation">
+        <div class="slide-top-bar">
+          <div class="top-bar-left">
+            <span class="slide-badge">Case 02</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Rules &amp; Geometry</span>
+          </div>
+          <span class="slide-pagination">03 / 04</span>
+        </div>
+
+        <div class="slide-main-content">
+          <div class="case-header-row">
+            <h2 class="case-title">Move Validation &amp; Rule Dispatch</h2>
+            <span class="case-metric-pill">34 LOC &rarr; 5 LOC (-85%)</span>
+          </div>
+
+          <!-- 100% Vector Native Code Blocks (Clean Indented Lines, No Right-Edge Clipping) -->
+          <div class="code-comparison-row">
+            <!-- Left: C Window -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">chess.c</span>
+                  <span class="lang-pill c">C (Legacy)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+                  </pre>
+                  <pre class="code-lines"><code><span class="tp">Piece</span> pawn = {<span class="st">'P'</span>};
+<span class="tp">Piece</span> rook = {<span class="st">'R'</span>};
+<span class="tp">Piece</span> knight = {<span class="st">'N'</span>};
+<span class="tp">Piece</span> bishop = {<span class="st">'B'</span>};
+<span class="tp">Piece</span> queen = {<span class="st">'Q'</span>};
+<span class="tp">Piece</span> king = {<span class="st">'K'</span>};
+<span class="tp">Piece</span> <span class="op">*</span> Pieces[<span class="lt">6</span>] = {<span class="op">&amp;</span>pawn, <span class="op">&amp;</span>rook, <span class="op">&amp;</span>knight, <span class="op">&amp;</span>bishop, <span class="op">&amp;</span>queen, <span class="op">&amp;</span>king};
+
+<span class="kw">static</span> <span class="kw">bool</span> <span class="fn">check_geometry_only</span>(<span class="tp">Input</span> move,
+                                <span class="kw">char</span> position[<span class="lt">8</span>][<span class="lt">8</span>], <span class="kw">int</span> en_passant_col) {
+
+    <span class="tp">Piece</span> movPiece;
+    <span class="kw">bool</span> Piece_found = <span class="lt">false</span>;
+    <span class="kw">for</span>(<span class="kw">int</span> i = <span class="lt">0</span>; i &lt; <span class="lt">6</span>; i++){
+        <span class="kw">if</span>(move.figure == Pieces[i]<span class="op">-&gt;</span>figure){
+            movPiece = <span class="op">*</span>Pieces[i];
+            Piece_found = <span class="lt">true</span>;
+        }
+    }
+    <span class="kw">if</span>(!Piece_found) <span class="kw">return</span> <span class="lt">false</span>;
+
+    <span class="tp">Distances</span> d;
+    <span class="fn">setup_distances</span>(move, <span class="op">&amp;</span>d);
+
+    <span class="kw">switch</span>(movPiece.figure){
+        <span class="kw">case</span> <span class="st">'P'</span>: <span class="kw">return</span> <span class="fn">is_pawn_valid</span>(move, position, d, en_passant_col);
+        <span class="kw">case</span> <span class="st">'N'</span>: <span class="kw">return</span> <span class="fn">is_knight_valid</span>(move, position, d);
+        <span class="kw">case</span> <span class="st">'K'</span>: <span class="kw">return</span> <span class="fn">is_king_valid</span>(move, position, d);
+        <span class="kw">case</span> <span class="st">'R'</span>: <span class="kw">return</span> <span class="fn">is_rook_valid</span>(move, position, d);
+        <span class="kw">case</span> <span class="st">'B'</span>: <span class="kw">return</span> <span class="fn">is_bishop_valid</span>(move, position, d);
+        <span class="kw">case</span> <span class="st">'Q'</span>: <span class="kw">return</span> <span class="fn">is_rook_valid</span>(move, position, d)
+               <span class="op">||</span> <span class="fn">is_bishop_valid</span>(move, position, d);
+        <span class="kw">default</span>: <span class="kw">return</span> <span class="lt">false</span>;
+    }
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Center Arrow -->
+            <div class="arrow-divider-col" aria-hidden="true">
+              <div class="arrow-circle">&rarr;</div>
+            </div>
+
+            <!-- Right: C++ Window -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">chess.cpp</span>
+                  <span class="lang-pill cpp">C++ (OOP)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+                  </pre>
+                  <pre class="code-lines"><code><span class="tp">Piece</span> <span class="op">*</span>p = position[move.orig_row][move.orig_column];
+<span class="kw">if</span> (p == <span class="kw">nullptr</span>) <span class="kw">return</span> <span class="lt">false</span>;
+
+<span class="kw">bool</span> geometryValid = p<span class="op">-&gt;</span><span class="fn">isValidMove</span>(move.orig_row, move.orig_column,
+    move.target_row, move.target_column, position, b, en_passant_col);</code></pre>
+                </div>
+                <div class="code-side-callout">
+                  <div class="side-callout-header">OCP &amp; Direct Dispatch Win</div>
+                  <div class="side-callout-text">
+                    <strong>Open-Closed Principle:</strong> Adding a new piece requires <em>zero modifications</em> to this dispatch engine. Direct O(1) pointer dereferencing completely replaces global arrays and linear loops.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Improvements Summary -->
+          <div class="improvements-card">
+            <div class="improvements-header">
+              <span>Key Improvements &amp; Architecture</span>
+            </div>
+            <p class="improvements-desc">
+              Cut from 34 lines down to just 5 lines (-85%). In C, move validation required searching an O(N) global piece array, instantiating an intermediate distance struct, and routing through a rigid procedural <code>switch</code>. C++ replaces all of this with direct O(1) board lookup and dynamic polymorphism (<code>p-&gt;isValidMove(...)</code>), adhering strictly to the Open-Closed Principle where new pieces can be added with zero changes to existing dispatch code.
+            </p>
+            <div class="concept-pills-row">
+              <span class="concept-pill">Dynamic Polymorphism</span>
+              <span class="concept-pill">Open-Closed Principle (OCP)</span>
+              <span class="concept-pill">O(1) Direct Lookup</span>
+              <span class="concept-pill">Zero Global State</span>
+              <span class="concept-pill">-85% LOC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer-bar">
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 02</span>
+          <span class="slide-footer-note">Slide 3 of 4</span>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 4: CASE 03 - STORAGE & RAII ================= -->
+      <section class="carousel-slide" id="slide-4" data-slide-index="4" aria-label="Slide 4 of 4: File Storage & Safety">
+        <div class="slide-top-bar">
+          <div class="top-bar-left">
+            <span class="slide-badge">Case 03</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Persistence &amp; Memory</span>
+          </div>
+          <span class="slide-pagination">04 / 04</span>
+        </div>
+
+        <div class="slide-main-content">
+          <div class="case-header-row">
+            <h2 class="case-title">File Storage &amp; Resource Safety (<code>load_boards</code> &rarr; <code>BoardTree::load</code>)</h2>
+            <span class="case-metric-pill">Leak Hazard &rarr; 100% RAII Safe</span>
+          </div>
+
+          <!-- 100% Vector Native Code Blocks (Balanced Columns with Hazard vs RAII Boxes) -->
+          <div class="code-comparison-row">
+            <!-- Left: C Window with LEGACY HAZARD Callout -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">storage.c</span>
+                  <span class="lang-pill c">C (Legacy)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+6
+                  </pre>
+                  <pre class="code-lines"><code><span class="kw">void</span> <span class="fn">load_boards</span>(<span class="kw">char</span><span class="op">*</span> filename, <span class="tp">Board</span><span class="op">**</span> head){
+    <span class="tp">FILE</span><span class="op">*</span> filepointer = <span class="fn">fopen</span>(filename, <span class="st">"rb"</span>);
+    <span class="kw">if</span>(filepointer == <span class="kw">NULL</span>) <span class="kw">return</span>;
+    <span class="cm">...</span>
+    <span class="fn">fclose</span>(filepointer);
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Center Arrow -->
+            <div class="arrow-divider-col" aria-hidden="true">
+              <div class="arrow-circle">&rarr;</div>
+            </div>
+
+            <!-- Right: C++ Window with RAII & EXCEPTIONS Callout -->
+            <div class="code-col">
+              <div class="code-window">
+                <div class="window-titlebar">
+                  <div class="window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="window-filename">storage.cpp</span>
+                  <span class="lang-pill cpp">C++ (OOP)</span>
+                </div>
+                <div class="code-body">
+                  <pre class="line-numbers" aria-hidden="true">
+1
+2
+3
+4
+5
+6
+7
+8
+                  </pre>
+                  <pre class="code-lines"><code><span class="kw">void</span> <span class="tp">BoardTree</span><span class="op">::</span><span class="fn">load</span>(<span class="kw">const</span> <span class="kw">char</span> <span class="op">*</span>filename) {
+    <span class="tp">std</span><span class="op">::</span><span class="tp">ifstream</span> in(filename, <span class="tp">std</span><span class="op">::</span><span class="tp">ios</span><span class="op">::</span>binary);
+    <span class="kw">if</span> (<span class="op">!</span>in)
+        <span class="kw">throw</span> <span class="tp">FileNotFoundException</span>(filename);
+    <span class="tp">BoardElement</span> element;
+    <span class="kw">while</span> (in.<span class="fn">read</span>(<span class="kw">reinterpret_cast</span><span class="op">&lt;</span><span class="kw">char</span> <span class="op">*&gt;</span>(<span class="op">&amp;</span>element), <span class="kw">sizeof</span>(element)))
+        <span class="fn">createFromElement</span>(<span class="op">&amp;</span>element);
+}</code></pre>
+                </div>
+                <div class="code-side-callout">
+                  <div class="side-callout-header">RAII &amp; Exceptions</div>
+                  <div class="side-callout-text">
+                    <strong>Deterministic Cleanup:</strong> <code>std::ifstream</code> automatically releases OS file handles on scope exit or exceptions. Replaces silent failures with explicit typed errors.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Improvements Summary -->
+          <div class="improvements-card">
+            <div class="improvements-header">
+              <span>Key Improvements &amp; Architecture</span>
+            </div>
+            <p class="improvements-desc">
+              Replaced raw <code>FILE*</code> handles and double pointers (<code>Board** head</code>) with an encapsulated <code>BoardTree::load</code> class method. In C, manual <code>fopen</code>/<code>fclose</code> leaves file descriptors vulnerable to leaks on early exits, while failing silently on missing files. C++ leverages deterministic RAII via <code>std::ifstream</code> to guarantee automatic cleanup on scope exit, paired with explicit <code>FileNotFoundException</code> error handling.
+            </p>
+            <div class="concept-pills-row">
+              <span class="concept-pill">RAII Resource Safety</span>
+              <span class="concept-pill">Typed Exceptions</span>
+              <span class="concept-pill">Class Encapsulation</span>
+              <span class="concept-pill">Const Correctness</span>
+              <span class="concept-pill">Leak-Proof</span>
+            </div>
+          </div>
+
+          <!-- Core Takeaways Mini Card -->
+          <div class="takeaways-mini-card">
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>Polymorphism</strong> over monolithic switches</div>
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>RAII</strong> over manual resource cleanup</div>
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>OCP compliance</strong> for clean extensibility</div>
+          </div>
+        </div>
+
+        <div class="slide-footer-bar">
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 03</span>
+          <span class="slide-footer-note">Slide 4 of 4</span>
+        </div>
+      </section>
+
+    </div><!-- /#camera -->
+  </div><!-- /#stage -->
+
+  <script src="cinematic.js"></script>
+</body>
+</html>
