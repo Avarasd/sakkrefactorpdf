@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
 
@@ -24,18 +24,18 @@
     </div>
 
     <button class="btn-secondary" id="toggleViewBtn" type="button">
-      <span>📑 Mode: Carousel</span>
+      <span>Mode: Carousel</span>
     </button>
 
     <div class="toolbar-actions">
       <button class="btn-primary" id="btnExportPdf" type="button" title="Generate multi-page PDF optimized for LinkedIn Carousel">
-        <span>📄 Export LinkedIn PDF (4 Pages)</span>
+        <span>Export LinkedIn PDF (4 Pages)</span>
       </button>
-      <button class="btn-secondary" id="btnPrintVector" type="button" title="Open system print dialog for 100% native vector PDF">
-        <span>🖨️ Native Vector PDF (Cmd+P)</span>
+      <button class="btn-secondary" id="btnPrintVector" type="button" title="Open system print dialog for native vector PDF">
+        <span>Native Vector PDF (Cmd+P)</span>
       </button>
       <button class="btn-secondary" id="btnExportCurrentPng" type="button" title="Download current slide as high-res PNG">
-        <span>📸 Export Slide PNG</span>
+        <span>Export Slide PNG</span>
       </button>
     </div>
   </aside>
@@ -61,7 +61,7 @@
           </div>
 
           <h1 class="cover-title">
-            Chess TUI: <span class="c-text">Procedural C</span> <span class="arrow-text">➔</span> <span class="cpp-text">Modern C++ OOP</span>
+            Chess TUI: <span class="c-text">Procedural C</span> <span class="arrow-text">&rarr;</span> <span class="cpp-text">Modern C++ OOP</span>
           </h1>
 
           <p class="cover-subtitle">
@@ -72,7 +72,6 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">Lines of Code</span>
-                <span class="kpi-icon">📉</span>
               </div>
               <div class="kpi-stat">~75% Less</div>
               <div class="kpi-desc">Core logic cut by more than half, eliminating nested switches and redundant boilerplate.</div>
@@ -81,7 +80,6 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">Architecture</span>
-                <span class="kpi-icon">🧩</span>
               </div>
               <div class="kpi-stat">Polymorphism</div>
               <div class="kpi-desc">Replaced procedural switch-case dispatch with pure virtual methods conforming to OCP.</div>
@@ -90,7 +88,6 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">Resource Safety</span>
-                <span class="kpi-icon">🛡️</span>
               </div>
               <div class="kpi-stat">100% RAII</div>
               <div class="kpi-desc">Zero file handle leaks via deterministic destructors and typed exceptions.</div>
@@ -99,7 +96,6 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">Type Safety</span>
-                <span class="kpi-icon">🎯</span>
               </div>
               <div class="kpi-stat">Strong Types</div>
               <div class="kpi-desc">Replaced raw char arrays, magic character math, and double pointers with safe object pointers.</div>
@@ -107,13 +103,13 @@
           </div>
 
           <div class="cover-cta">
-            <span>Swipe to explore the 3 refactoring pairs ➔</span>
+            <span>Swipe to explore the three refactoring pairs</span>
           </div>
         </div>
 
         <div class="slide-footer-bar">
-          <span class="slide-footer-brand">Chess TUI Architecture • C to C++ OOP</span>
-          <span class="slide-footer-note">Swipe ➔</span>
+          <span class="slide-footer-brand">Chess TUI Architecture — C to C++ OOP</span>
+          <span class="slide-footer-note">Swipe</span>
         </div>
       </section>
 
@@ -130,7 +126,7 @@
         <div class="slide-main-content">
           <div class="case-header-row">
             <h2 class="case-title">Board Material Evaluation (<code>check_eval</code>)</h2>
-            <span class="case-metric-pill">32 LOC ➔ 10 LOC (-69%)</span>
+            <span class="case-metric-pill">32 LOC &rarr; 10 LOC (-69%)</span>
           </div>
 
           <!-- 100% Vector Native Code Blocks (No Horizontal Clipping) -->
@@ -220,7 +216,7 @@
 
             <!-- Center Arrow -->
             <div class="arrow-divider-col" aria-hidden="true">
-              <div class="arrow-circle">➔</div>
+              <div class="arrow-circle">&rarr;</div>
             </div>
 
             <!-- Right: C++ Window -->
@@ -260,7 +256,7 @@
 }</code></pre>
                 </div>
                 <div class="code-side-callout">
-                  <div class="side-callout-header">✨ Polymorphic Valuation Win</div>
+                  <div class="side-callout-header">Polymorphic Valuation Win</div>
                   <div class="side-callout-text">
                     <strong>Encapsulated Values:</strong> Replaced 15 lines of monolithic <code>switch-case</code> with a single <code>p-&gt;value()</code> call. Replaced ASCII arithmetic with type-safe <code>nullptr</code> checking.
                   </div>
@@ -272,7 +268,7 @@
           <!-- Key Improvements Summary -->
           <div class="improvements-card">
             <div class="improvements-header">
-              <span>⚡ Key Improvements &amp; Architecture</span>
+              <span>Key Improvements &amp; Architecture</span>
             </div>
             <p class="improvements-desc">
               Replaced 32 lines of procedural code with 10 lines of clean OOP. The C version used manual ASCII offset arithmetic (<code>piece &gt; 'Z'</code>) and a bulky 15-line <code>switch</code> statement to map characters to values. In C++, each piece encapsulates its own material value through polymorphism (<code>p-&gt;value()</code>), guarded by type-safe <code>nullptr</code> checks instead of magic character comparisons.
@@ -288,8 +284,8 @@
         </div>
 
         <div class="slide-footer-bar">
-          <span class="slide-footer-brand">Chess TUI Architecture • Case 01</span>
-          <span class="slide-footer-note">Slide 2 of 4 • Swipe ➔</span>
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 01</span>
+          <span class="slide-footer-note">Slide 2 of 4</span>
         </div>
       </section>
 
@@ -306,7 +302,7 @@
         <div class="slide-main-content">
           <div class="case-header-row">
             <h2 class="case-title">Move Validation &amp; Rule Dispatch</h2>
-            <span class="case-metric-pill">34 LOC ➔ 5 LOC (-85%)</span>
+            <span class="case-metric-pill">34 LOC &rarr; 5 LOC (-85%)</span>
           </div>
 
           <!-- 100% Vector Native Code Blocks (Clean Indented Lines, No Right-Edge Clipping) -->
@@ -400,7 +396,7 @@
 
             <!-- Center Arrow -->
             <div class="arrow-divider-col" aria-hidden="true">
-              <div class="arrow-circle">➔</div>
+              <div class="arrow-circle">&rarr;</div>
             </div>
 
             <!-- Right: C++ Window -->
@@ -430,7 +426,7 @@
     move.target_row, move.target_column, position, b, en_passant_col);</code></pre>
                 </div>
                 <div class="code-side-callout">
-                  <div class="side-callout-header">🎯 OCP &amp; Direct Dispatch Win</div>
+                  <div class="side-callout-header">OCP &amp; Direct Dispatch Win</div>
                   <div class="side-callout-text">
                     <strong>Open-Closed Principle:</strong> Adding a new piece requires <em>zero modifications</em> to this dispatch engine. Direct O(1) pointer dereferencing completely replaces global arrays and linear loops.
                   </div>
@@ -442,7 +438,7 @@
           <!-- Key Improvements Summary -->
           <div class="improvements-card">
             <div class="improvements-header">
-              <span>⚡ Key Improvements &amp; Architecture</span>
+              <span>Key Improvements &amp; Architecture</span>
             </div>
             <p class="improvements-desc">
               Cut from 34 lines down to just 5 lines (-85%). In C, move validation required searching an O(N) global piece array, instantiating an intermediate distance struct, and routing through a rigid procedural <code>switch</code>. C++ replaces all of this with direct O(1) board lookup and dynamic polymorphism (<code>p-&gt;isValidMove(...)</code>), adhering strictly to the Open-Closed Principle where new pieces can be added with zero changes to existing dispatch code.
@@ -458,8 +454,8 @@
         </div>
 
         <div class="slide-footer-bar">
-          <span class="slide-footer-brand">Chess TUI Architecture • Case 02</span>
-          <span class="slide-footer-note">Slide 3 of 4 • Swipe ➔</span>
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 02</span>
+          <span class="slide-footer-note">Slide 3 of 4</span>
         </div>
       </section>
 
@@ -475,8 +471,8 @@
 
         <div class="slide-main-content">
           <div class="case-header-row">
-            <h2 class="case-title">File Storage &amp; Resource Safety (<code>load_boards</code> ➔ <code>BoardTree::load</code>)</h2>
-            <span class="case-metric-pill">Leak Hazard ➔ 100% RAII Safe</span>
+            <h2 class="case-title">File Storage &amp; Resource Safety (<code>load_boards</code> &rarr; <code>BoardTree::load</code>)</h2>
+            <span class="case-metric-pill">Leak Hazard &rarr; 100% RAII Safe</span>
           </div>
 
           <!-- 100% Vector Native Code Blocks (Balanced Columns with Hazard vs RAII Boxes) -->
@@ -514,7 +510,7 @@
 
             <!-- Center Arrow -->
             <div class="arrow-divider-col" aria-hidden="true">
-              <div class="arrow-circle">➔</div>
+              <div class="arrow-circle">&rarr;</div>
             </div>
 
             <!-- Right: C++ Window with RAII & EXCEPTIONS Callout -->
@@ -550,7 +546,7 @@
 }</code></pre>
                 </div>
                 <div class="code-side-callout">
-                  <div class="side-callout-header">🛡️ RAII &amp; Exceptions</div>
+                  <div class="side-callout-header">RAII &amp; Exceptions</div>
                   <div class="side-callout-text">
                     <strong>Deterministic Cleanup:</strong> <code>std::ifstream</code> automatically releases OS file handles on scope exit or exceptions. Replaces silent failures with explicit typed errors.
                   </div>
@@ -562,7 +558,7 @@
           <!-- Key Improvements Summary -->
           <div class="improvements-card">
             <div class="improvements-header">
-              <span>⚡ Key Improvements &amp; Architecture</span>
+              <span>Key Improvements &amp; Architecture</span>
             </div>
             <p class="improvements-desc">
               Replaced raw <code>FILE*</code> handles and double pointers (<code>Board** head</code>) with an encapsulated <code>BoardTree::load</code> class method. In C, manual <code>fopen</code>/<code>fclose</code> leaves file descriptors vulnerable to leaks on early exits, while failing silently on missing files. C++ leverages deterministic RAII via <code>std::ifstream</code> to guarantee automatic cleanup on scope exit, paired with explicit <code>FileNotFoundException</code> error handling.
@@ -578,15 +574,15 @@
 
           <!-- Core Takeaways Mini Card -->
           <div class="takeaways-mini-card">
-            <div class="takeaway-item"><span class="icon">✓</span> <strong>Polymorphism</strong> over monolithic switches</div>
-            <div class="takeaway-item"><span class="icon">✓</span> <strong>RAII</strong> over manual resource cleanup</div>
-            <div class="takeaway-item"><span class="icon">✓</span> <strong>OCP compliance</strong> for clean extensibility</div>
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>Polymorphism</strong> over monolithic switches</div>
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>RAII</strong> over manual resource cleanup</div>
+            <div class="takeaway-item"><span class="icon">&mdash;</span> <strong>OCP compliance</strong> for clean extensibility</div>
           </div>
         </div>
 
         <div class="slide-footer-bar">
-          <span class="slide-footer-brand">Chess TUI Architecture • Case 03</span>
-          <span class="slide-footer-note">Slide 4 of 4 • Complete</span>
+          <span class="slide-footer-brand">Chess TUI Architecture — Case 03</span>
+          <span class="slide-footer-note">Slide 4 of 4</span>
         </div>
       </section>
 

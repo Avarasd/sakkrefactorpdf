@@ -71,11 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
       isCarouselMode = !isCarouselMode;
       if (isCarouselMode) {
         slidesContainer.classList.add('carousel-mode');
-        toggleViewBtn.innerHTML = '<span>📑 Mode: Carousel</span>';
+        toggleViewBtn.innerHTML = '<span>Mode: Carousel</span>';
         showSlide(currentSlideIndex);
       } else {
         slidesContainer.classList.remove('carousel-mode');
-        toggleViewBtn.innerHTML = '<span>📜 Mode: All Slides</span>';
+        toggleViewBtn.innerHTML = '<span>Mode: All Slides</span>';
         if (slideIndicator) slideIndicator.textContent = 'All 4 Slides';
       }
     });
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnExportPdf) {
     btnExportPdf.addEventListener('click', async () => {
       const originalText = btnExportPdf.innerHTML;
-      btnExportPdf.innerHTML = '<span>⏳ Rendering PDF (Page 1/4)...</span>';
+      btnExportPdf.innerHTML = '<span>Rendering PDF (Page 1/4)...</span>';
       btnExportPdf.style.opacity = '0.7';
       btnExportPdf.style.pointerEvents = 'none';
 
@@ -133,12 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < slides.length; i++) {
           const slide = slides[i];
-          btnExportPdf.innerHTML = `<span>⏳ Rendering Slide ${i + 1} of ${totalSlides}...</span>`;
+          btnExportPdf.innerHTML = `<span>Rendering Slide ${i + 1} of ${totalSlides}...</span>`;
 
           const canvas = await html2canvas(slide, {
             scale: 2.5, // Ultra-high resolution crisp capture
             useCORS: true,
-            backgroundColor: '#0b0f19',
+            backgroundColor: '#ffffff',
             logging: false,
             imageTimeout: 15000
           });
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pdf.save('chess-refactoring-linkedin-carousel.pdf');
 
-        btnExportPdf.innerHTML = '<span>✅ PDF Downloaded!</span>';
+        btnExportPdf.innerHTML = '<span>PDF Downloaded</span>';
         setTimeout(() => {
           btnExportPdf.innerHTML = originalText;
           btnExportPdf.style.opacity = '1';
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!activeSlide) return;
 
       const originalText = btnExportPng.innerHTML;
-      btnExportPng.innerHTML = '<span>⏳ Exporting...</span>';
+      btnExportPng.innerHTML = '<span>Exporting...</span>';
       btnExportPng.style.opacity = '0.7';
 
       try {
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const canvas = await html2canvas(activeSlide, {
           scale: 3, // 3x crisp retina capture
           useCORS: true,
-          backgroundColor: '#0b0f19',
+          backgroundColor: '#ffffff',
           logging: false
         });
 
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
         document.body.removeChild(link);
 
-        btnExportPng.innerHTML = '<span>✅ PNG Saved!</span>';
+        btnExportPng.innerHTML = '<span>PNG Saved</span>';
         setTimeout(() => {
           btnExportPng.innerHTML = originalText;
           btnExportPng.style.opacity = '1';
