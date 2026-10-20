@@ -31,6 +31,8 @@ const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const FPS = 30;
 const WIDTH = 1080;
 const HEIGHT = 1350;
+const SCALE = 2;    // supersampling factor for frame capture (downscaled on encode)
+const CRF = 15;     // lower = higher quality (visually near-lossless)
 
 function log() {
   console.log.apply(console, ['[make_video]'].concat([].slice.call(arguments)));
@@ -76,7 +78,11 @@ async function captureWithPuppeteer() {
 
   try {
     const page = await browser.newPage();
-    await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 1 });
+    // 2x supersampling: render the stage at twice the pixel density, then
+    // downscale during encode. This anti-aliases text/edges for crisper output.
+    // clip stays in CSS px (WIDTH x HEIGHT); deviceScaleFactor upsamples the
+    // actual raster to 2*WIDTH x 2*HEIGHT.
+    await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: SCALE });
     // domcontentloaded (not networkidle0): the Google Fonts stylesheet can keep
     // the network "busy" in headless; we gate on window.READY which itself waits
     // for document.fonts.ready, so fonts are guaranteed loaded before capture.
@@ -133,6 +139,7 @@ function captureWithChromeCli(total) {
       '--disable-gpu',
       '--hide-scrollbars',
       '--force-color-profile=srgb',
+      '--force-device-scale-factor=' + SCALE,
       '--screenshot=' + out,
       '--window-size=' + WIDTH + ',' + HEIGHT,
       '--default-background-color=0',
@@ -150,15 +157,21 @@ function captureWithChromeCli(total) {
 
 /* ---------------- encode ---------------- */
 function encode() {
-  log('encoding started (ffmpeg libx264 yuv420p crf18 preset slow)...');
+  log('encoding started (ffmpeg libx264 yuv420p crf' + CRF +
+      ' preset slow, ' + SCALE + 'x -> 1x Lanczos downscale)...');
+  // Frames were captured at SCALE x. Downscale to WIDTH x HEIGHT with Lanczos
+  // for crisp anti-aliased output. -tune stillimage favors the long static
+  // holds without hurting the motion segments.
   execFileSync(FFMPEG, [
     '-y',
     '-framerate', String(FPS),
     '-i', path.join(FRAMES_DIR, 'frame-%05d.png'),
+    '-vf', 'scale=' + WIDTH + ':' + HEIGHT + ':flags=lanczos',
     '-c:v', 'libx264',
     '-pix_fmt', 'yuv420p',
-    '-crf', '18',
+    '-crf', String(CRF),
     '-preset', 'slow',
+    '-tune', 'stillimage',
     OUTPUT
   ], { stdio: ['ignore', 'inherit', 'inherit'] });
 }

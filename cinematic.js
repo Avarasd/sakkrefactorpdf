@@ -138,10 +138,10 @@
       tween(t0 + 1.6, t0 + 3.6, cF, cF);
       // pan/zoom to C++ window
       tween(t0 + 3.6, t0 + 4.5, cF, cppF);
-      // hold on C++ (callout pops during this hold)
-      tween(t0 + 4.5, t0 + 6.1, cppF, cppF);
+      // hold on C++ (callout pops during this hold, then a long reading pause)
+      tween(t0 + 4.5, t0 + 8.6, cppF, cppF);
       // zoom back out to full slide
-      tween(t0 + 6.1, t0 + 6.9, cppF, full);
+      tween(t0 + 8.6, t0 + 9.4, cppF, full);
 
       // Callout pop: starts a short delay after C++ settles ("punchline").
       CALLOUT_POPS.push({
@@ -150,7 +150,7 @@
         end: t0 + 5.6
       });
 
-      return t0 + 6.9;
+      return t0 + 9.4;
     }
 
     var t = 5.5;
