@@ -1,37 +1,22 @@
+# OS / editor noise
 .env
 .DS_Store
 
+# Node dependencies (used only by the video build script, not the site)
+node_modules/
+
 # Video pipeline artifacts
 .video_frames/
-node_modules/
 carousel_walkthrough.mp4
 
-# Reference/source screenshots (not used by the site; kept locally only)
-chess.c.png
-chess.cpp.png
-chess.c-cropped.png
-chess.cpp-cropped.png
-chess.c-window.png
-chess.cpp-window.png
-chess-2.c.png
-chess-2.cpp.png
-chess-2.c-cropped.png
-chess-2.cpp-cropped.png
-chess-2.c-window.png
-chess-2.cpp-window.png
-storage-2.c.png
-storage-2.cpp.png
-storage-2.c-cropped.png
-storage-2.cpp-cropped.png
-storage-2.c-window.png
-storage-2.cpp-window.png
-crop_windows.png
-pdf_page_1.png
-pdf_page_2.png
-pdf_page_3.png
-pdf_page_4.png
-screenshot_slide2.png
-screenshot_slide3.png
-screenshot_slide4.png
-screenshot_test.png
-test_current_render.png
+# Agent workflow scratch files
+.agents/
+
+# Reference/source images — the site renders from HTML/CSS, not images,
+# so no raster assets belong in the repo.
+*.png
+*.tiff
+*.tif
+*.jpg
+*.jpeg
+*.gif
